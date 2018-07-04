@@ -12,14 +12,14 @@ component{
 		prc.xehForceUpdateUserFiddles = cb.buildModuleLink("jsFiddle","home.forceUpdateUserFiddles");
 		prc.tabModules_jsFiddle = true;
 		// settings
-		prc.settings = getModuleSettings("jsFiddle").settings;
+		prc.settings = getModuleSettings("jsfiddle");
 		// view
 		event.setView("home/settings");
 	}
 
 	function saveSettings( required Any event, required Struct rc, required Struct prc ){
 		// Get jsfiddle settings
-		prc.settings = getModuleSettings("jsFiddle").settings;
+		prc.settings = getModuleSettings("jsFiddle");
 
 		// iterate over settings
 		for(var key in prc.settings){
@@ -37,14 +37,14 @@ component{
 		jsFiddle.saveUsers( users=listToArray( prc.settings.users ) );
 		jsFiddle.cleanupUsers( listToArray( prc.settings.users ) );
 		// Messagebox
-		getPlugin("MessageBox").info("Settings Saved & Updated!");
+		getInstance("MessageBox@cbmessagebox").info("Settings Saved & Updated!");
 		// Relocate via CB Helper
 		cb.setNextModuleEvent("jsFiddle","home.settings");
 	}
 
 	function forceUpdateUserFiddles( required Any event, required Struct rc, required Struct prc ) {
 		// Get jsfiddle settings
-		prc.settings = getModuleSettings( "jsFiddle" ).settings;
+		prc.settings = getModuleSettings( "jsFiddle" );
 		jsFiddle.updateUserFiddles( users=listToArray( prc.settings.users ), forceUpdate=true );
         return 'yes';
 	}
@@ -57,7 +57,7 @@ component{
 	function checkUserIsReal(  required Any event, required Struct rc, required Struct prc  ) {
 		event.paramValue("user","");
 		var fiddles = jsFiddle.getUserFiddles( user=rc.user );
-		var mydata = isJSON( fiddles ) ? "yes" : "no";
+		var mydata = isArray( deserializeJSON(fiddles) ) ? "yes" : "no";
 		if( event.isAjax() ) {
 			return mydata;
 		}
@@ -65,7 +65,7 @@ component{
 	
 	function entry( required Any event, required Struct rc, required Struct prc ){
 		// settings
-		prc.settings = getModuleSettings("jsFiddle").settings;
+		prc.settings = getModuleSettings("jsFiddle");
 		prc.settings.fiddles = jsFiddle.getAllUserFiddles();
 		prc.xehEmbedCode = cb.buildModuleLink("jsFiddle","home.getFiddles");
 
@@ -76,7 +76,7 @@ component{
 
 	function edit( required Any event, required Struct rc, required Struct prc ){
 		// settings
-		prc.settings = getModuleSettings("jsFiddle").settings;
+		prc.settings = getModuleSettings("jsFiddle");
 		prc.xehEmbedCode = cb.buildModuleLink("jsFiddle","home.getFiddles");
 		// view
 		event.setView(view="home/edit")

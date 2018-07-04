@@ -23,11 +23,11 @@
 $(document).ready(function() {
 	// form validators
 	$("##settingsForm").validate();
-    $( 'img.add_jsfiddleuser' ).click( addUser );
-    $( 'img.delete_jsfiddleuser' ).live( 'click', function(){
+    $( '.add_jsfiddleuser' ).click( addUser );
+    $( 'img.delete_jsfiddleuser' ).click( function(){
         removeUser( $( this ).next()[0].innerHTML );
     });
-    $( 'button.##updatefiddles' ).click( function() {
+    $( '##updatefiddles' ).click( function() {
         var me = $( this ),
             parent = me.parent();
         $.ajax({

@@ -19,6 +19,7 @@ component {
 	this.layoutParentLookup = true;
 	// Module Entry Point
 	this.entryPoint			= "jsfiddle";
+	this.alias			= "jsFiddle";
 
 	function configure(){
 
@@ -47,7 +48,6 @@ component {
 
 		// objects
 		binder.map("jsFiddle@jsFiddle").to("#moduleMapping#.model.jsFiddle");
-		binder.map("fileUtils@jsFiddle").to("coldbox.system.core.util.FileUtils");
 	}
 
 	/**
@@ -86,10 +86,9 @@ component {
 		}
 
 		// Install the ckeditor plugin
-		var ckeditorPluginsPath = controller.getSetting("modules")["contentbox-admin"].path & "/includes/ckeditor/plugins/cbjsFiddle";
-		var fileUtils = controller.getWireBox().getInstance("fileUtils@jsFiddle");
-		var pluginPath = controller.getSetting("modules")["jsFiddle"].path & "/includes/cbjsFiddle";
-		fileUtils.directoryCopy(source=pluginPath, destination=ckeditorPluginsPath);
+		var ckeditorPluginsPath = controller.getSetting("modules")["contentbox-admin"].path & "/modules/contentbox-ckeditor/includes/ckeditor/plugins/cbjsFiddle";
+		var pluginPath = moduleMapping & "/includes/cbjsFiddle";
+		directoryCopy(source=pluginPath, destination=ckeditorPluginsPath, recurse=true);
 	}
 
 	/**
@@ -113,9 +112,8 @@ component {
 			settingService.delete( setting );
 		}
 		// Uninstall the ckeditor plugin
-		var ckeditorPluginsPath = controller.getSetting("modules")["contentbox-admin"].path & "/includes/ckeditor/plugins/cbjsFiddle";
-		var fileUtils = controller.getWireBox().getInstance("fileUtils@jsFiddle");
+		var ckeditorPluginsPath = controller.getSetting("modules")["contentbox-admin"].path & "/modules/contentbox-ckeditor/includes/ckeditor/plugins/cbjsFiddle";
 		var pluginPath = controller.getSetting("modules")["jsFiddle"].path & "/includes/cbjsFiddle";
-		fileUtils.directoryRemove(path=ckeditorPluginsPath, recurse=true);
+		directoryDelete(path=ckeditorPluginsPath, recurse=true);
 	}
 }
