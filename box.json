@@ -2,7 +2,7 @@
     "name":"ContentBox JsFiddle",
     "shortDescription":"This module allows you to add fiddle from JsFiddle into your pages",
     "location":"contentbox-modules/jsFiddle#v2.0.1",
-    "version":"2.0.1",
+    "version":"1.1.1",
     "slug":"contentbox-jsFiddle",
     "author":"Ortus Solutions <info@ortussolutions.com>",
     "homepage":"https://github.com/contentbox-modules/jsFiddle",
